@@ -4,12 +4,12 @@ locals {
 
 resource "aws_route53_zone" "mail" {
   count = var.create_hosted_zone ? 1 : 0
-  name = var.mail_domain_name
+  name  = var.mail_domain_name
 }
 
 data "aws_route53_zone" "mail" {
   count = var.create_hosted_zone == false && var.lookup_mail_zone_id == true ? 1 : 0
-  name = var.mail_domain_name
+  name  = var.mail_domain_name
 }
 
 
@@ -18,7 +18,7 @@ resource "aws_route53_record" "mx_record" {
   name    = "awslab.cloud"
   type    = "MX"
   ttl     = "300"
-  records = ["10 mx01.mail.icloud.com.", "10 mx02.mail.icloud.com." ]
+  records = ["10 mx01.mail.icloud.com.", "10 mx02.mail.icloud.com."]
 }
 
 resource "aws_route53_record" "txt_record" {
